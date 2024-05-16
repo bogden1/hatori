@@ -35,7 +35,8 @@ class Visualizer:
             verbose=2,
             n_iter=100000,
             n_iter_without_progress=1500,
-            metric='precomputed')
+            metric='precomputed',
+            init='random')
         return trainer.fit_transform(self.pdist)
 
     def mds(self):
