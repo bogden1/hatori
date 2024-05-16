@@ -5,12 +5,12 @@ import Vue from 'vue'
 
 import { bb } from 'billboard.js'
 
-const ENDPOINT = "https://datasci.brown.edu/hatori/"
+const ENDPOINT = "http://localhost:5000/"
 class Data {
 
   constructor() {
     this.data = {}
-    this.shared = require("../../../../assets/json/shared.json")
+    this.shared = require("../../../json/shared.json")
     this.template = Vue.compile(require('../tmpl/topic.vue').default)
   }
 
