@@ -46,10 +46,10 @@ class TextData:
                 yield (None, None, None)
                 continue
             name, year, text = splitted
-            index = name.rfind(SPACE)
+            #index = name.rfind(SPACE)
             year = round(float(year))
-            name, date = name[:index], name[index+1:]
-            yield name, year, date  # , text.count(SPACE) + 1
+            #name, date = name[:index], name[index+1:]
+            yield name, year, year  # , text.count(SPACE) + 1
         docs.close()
 
     @setproperty
