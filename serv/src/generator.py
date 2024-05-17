@@ -119,7 +119,7 @@ class Generator:
         }
 
         data = {
-            "embed": self.viz(),
+            "embed": self.viz(True),
             "graph": self.graph(),
             "front": self.front(),
             "shared": shared
