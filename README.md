@@ -57,3 +57,57 @@ $ (cd serv && python run_server.py)
 ```
 
 Settings can be configured in `generate_assets.py` and `run_server.py`. The server endpoint needs to be changed in `docs/page/topic/src/index.js` and the code recompiled.
+
+
+### Running on Ubuntu 23.10 (Mantic)
+
+#### Pre-requisites
+
+```
+sudo apt install python3-tk #This appears to be the way to get the tkinter module
+sudo apt install git-lfs
+#If this repository is already checked out then also: (cd hatori; git lfs install; git lfs pull)
+```
+
+#### Running the Front-End
+
+In `hatori/docs/page/topic/src/index.js`:
+* Edit `ENDPOINT` to point to where the back-end will be listening (e.g. `http://localhost:5000/`)
+* Remove `../assets` from `this.shared = require("../../../../assts/json/shared.json")
+
+In `hatori/docs/page/\*/makefile`:
+Edit to comment out any use of `--watch`
+
+[!NOTE]
+The above edits have already been made in this fork, but you still may have a different `ENDPOINT`
+
+
+```
+(cd hatori/docs; npm install --legacy-peer-deps)
+```
+
+[!WARN]
+The above is likely very insecure!
+
+```
+for x in `hatori/page/*`; do (cd "$x" && make); done
+(cd hatori/docs; python3 -m http.server -b 127.0.0.1 5001) #alter parameters depending on where you want your front-end to listen
+```
+
+Site is now available at http://127.0.0.1:5001/home/
+
+#### Running the Back-End
+
+In `hatori/serv/src/visualizer/visualizer.py`:
+Edit function `tsne` where it constructs an instance of `manifold.TSNE`: add an `init=random` parameter here. IIRC, some default changed and this gets us back to the original state of affairs
+
+[!NOTE]
+The above edit has already been made in this fork, as has an update to requirements.txt
+
+```
+mkvirtualenv hatori-backend
+(cd hatori/serv; pip install -r requirements.txt) #requirements.txt has been updated by installing requirements without version restriction, then using pip freeze to record the resulting deps as a new requirements.txt
+python generate_assets.py
+python run_server.py
+```
+
