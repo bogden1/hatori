@@ -1,5 +1,4 @@
 <div>
-  <div class="title"> Hansard </div>
   <input 
     class="search" 
     placeholder="search" 
