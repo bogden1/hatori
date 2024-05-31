@@ -6,6 +6,8 @@ ABS_DOCSFILE := $(abspath $(DOCSFILE))
 
 assets: serv/generate_assets.py $(ABS_STATEFILE) $(ABS_DOCFILE) | serv/data docs/cloud
 	(cd serv; python3 generate_assets.py -s $(ABS_STATEFILE) -d $(ABS_DOCSFILE))
+
+front-build:
 	(cd docs/page/front; make)
 	(cd docs/page/graph; make)
 	(cd docs/page/home; make)
