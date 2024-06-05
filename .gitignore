@@ -18,3 +18,4 @@ __pycache__/*
 /docs/page/{front,graph,home,map,topic}/js/
 /twistd.pid
 /serv/data/
+/serv/back_stdout
