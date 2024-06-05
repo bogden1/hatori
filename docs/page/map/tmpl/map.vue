@@ -13,7 +13,7 @@
             v-bind:r='name == currname ? 9*f**0.33 : 5.5*f**0.33'
             class="pointer"
             v-bind:class="name == currname ? 'currimg' : ''"
-            @mouseover="app.setimg(name);">
+            @mouseover="app.router.navigate('/' + name);">
           </circle>
         </a>
       </svg>

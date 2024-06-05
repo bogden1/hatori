@@ -39,6 +39,7 @@ class App {
       // router
       //  .on('topic', () => router.navigate(first))
       // setTimeout(() => router.resolve(), 0)
+      router.on('/:name', (x) => self.setimg(x.name))
       return router
     }
 
