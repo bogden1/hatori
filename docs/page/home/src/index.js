@@ -1,6 +1,7 @@
 
 import Vue from 'vue'
 import LazyLoad from 'lazyload'
+import wcmatch from 'wildcard-match'
 
 
 class App {
@@ -69,8 +70,11 @@ class App {
   _search(word) {
     this.temp.query = word.toLowerCase()
     word = word.toLowerCase()
+    if (word.replace(/\s/g, "").length == 0)
+      word = '*'
+    const isMatch = wcmatch(word)
     const shown = this.vue.items
-      .filter(i => i.word.some(w => w.includes(word)))
+      .filter(i => i.word.some(w => isMatch(w)))
       .map(i => i.id)
     this.vue.shown = new Set(shown)
   }
