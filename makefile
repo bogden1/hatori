@@ -7,16 +7,10 @@ ABS_DOCSFILE := $(abspath $(DOCSFILE))
 assets: serv/generate_assets.py $(ABS_STATEFILE) $(ABS_DOCFILE) | serv/data docs/cloud
 	(cd serv; python3 generate_assets.py -s $(ABS_STATEFILE) -d $(ABS_DOCSFILE))
 
-front-build:
-	(cd docs/page/front; make)
-	(cd docs/page/graph; make)
-	(cd docs/page/home; make)
-	(cd docs/page/map; make)
-	(cd docs/page/topic; make)
+front-build: page-build-front page-build-graph page-build-home page-build-map page-build-topic
 
-clean-assets:
-	rm -f docs/{cloud,front,json}/*
-	rm -f serv/data/*
+page-build-%:
+	(cd docs/page/$*; make)
 
 web: back-end front-end
 
